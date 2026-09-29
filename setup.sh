@@ -232,6 +232,24 @@ if [[ -f "$ZSHRC_SOURCE" ]]; then
 fi
 
 # ---------------------------------------------------------
+# tmux configuration
+# ---------------------------------------------------------
+
+TMUX_CONF_SOURCE="$SCRIPT_DIR/tmux/.tmux.conf"
+TMUX_CONF_TARGET="$HOME/.tmux.conf"
+
+if [[ -f "$TMUX_CONF_SOURCE" ]]; then
+    if [[ -e "$TMUX_CONF_TARGET" && ! -L "$TMUX_CONF_TARGET" ]]; then
+        mv "$TMUX_CONF_TARGET" "$TMUX_CONF_TARGET.backup.$(date +%Y%m%d%H%M%S)"
+    elif [[ -L "$TMUX_CONF_TARGET" ]]; then
+        rm "$TMUX_CONF_TARGET"
+    fi
+
+    ln -s "$TMUX_CONF_SOURCE" "$TMUX_CONF_TARGET"
+    echo "Linked tmux config: $TMUX_CONF_TARGET -> $TMUX_CONF_SOURCE"
+fi
+
+# ---------------------------------------------------------
 # Development directories
 # ---------------------------------------------------------
 
