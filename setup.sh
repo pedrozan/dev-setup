@@ -215,8 +215,20 @@ if [[ "$(getent passwd "$USER" | cut -d: -f7)" != "$ZSH_PATH" ]]; then
     sudo usermod --shell "$ZSH_PATH" "$USER"
 fi
 
-if [[ ! -f "$HOME/.zshrc" ]]; then
-    touch "$HOME/.zshrc"
+# Link the repo-managed Zsh configuration
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ZSHRC_SOURCE="$SCRIPT_DIR/zsh/.zshrc"
+ZSHRC_TARGET="$HOME/.zshrc"
+
+if [[ -f "$ZSHRC_SOURCE" ]]; then
+    if [[ -e "$ZSHRC_TARGET" && ! -L "$ZSHRC_TARGET" ]]; then
+        mv "$ZSHRC_TARGET" "$ZSHRC_TARGET.backup.$(date +%Y%m%d%H%M%S)"
+    elif [[ -L "$ZSHRC_TARGET" ]]; then
+        rm "$ZSHRC_TARGET"
+    fi
+
+    ln -s "$ZSHRC_SOURCE" "$ZSHRC_TARGET"
+    echo "Linked Zsh config: $ZSHRC_TARGET -> $ZSHRC_SOURCE"
 fi
 
 # ---------------------------------------------------------
