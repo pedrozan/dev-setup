@@ -66,6 +66,19 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
+        "thesimonho/kanagawa-paper.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {
+            style = "dark",
+        },
+        config = function(_, opts)
+            require("kanagawa-paper").setup(opts)
+            vim.cmd.colorscheme("kanagawa-paper-ink")
+        end,
+    },
+
+    {
         "stevearc/oil.nvim",
         lazy = false,
         dependencies = {
@@ -98,5 +111,35 @@ require("lazy").setup({
             })
         end,
     },
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate",
+        lazy = false,
+        opts = {
+            ensure_installed = {
+                "python",
+                "sql",
+                "bash",
+                "json",
+                "yaml",
+            },
+        },
+    },
+
+ })
+
+ -- Enable Treesitter highlighting
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "python",
+        "sql",
+        "bash",
+        "json",
+        "yaml",
+    },
+    callback = function()
+        vim.treesitter.start()
+    end,
 })
 
