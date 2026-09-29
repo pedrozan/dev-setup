@@ -9,7 +9,7 @@
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="af-magic"
 
 plugins=(
   git
@@ -94,5 +94,5 @@ compinit
 # Prompt
 # ------------------------------------------------------------
 
-PROMPT='%F{cyan}%n@%m%f:%F{blue}%~%f %# '
+# PROMPT='%F{cyan}%n@%m%f:%F{blue}%~%f %# '
 
