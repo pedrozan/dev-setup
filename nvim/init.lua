@@ -9,7 +9,7 @@ vim.g.maplocalleader = " "
 -- Basic editor settings
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.mouse = "a"
+vim.opt.mouse = ""
 vim.opt.clipboard = "unnamedplus"
 
 vim.opt.expandtab = true
