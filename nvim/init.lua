@@ -66,15 +66,11 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        "thesimonho/kanagawa-paper.nvim",
+        "yorumicolors/yorumi.nvim",
         lazy = false,
         priority = 1000,
-        opts = {
-            style = "dark",
-        },
-        config = function(_, opts)
-            require("kanagawa-paper").setup(opts)
-            vim.cmd.colorscheme("kanagawa-paper-ink")
+        config = function()
+            vim.cmd.colorscheme("yorumi")
         end,
     },
 
